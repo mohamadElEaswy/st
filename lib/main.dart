@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:st/src/services/navigation/navigation.dart';
+// import 'package:st/src/services/navigation/navigation.dart';
+import 'package:st/src/services/navigation/navigation_methods.dart';
 import 'package:st/src/ui/pages/home/home_page.dart';
 import 'package:st/src/ui/theme/theme.dart';
 
@@ -17,11 +18,11 @@ class MyApp extends StatelessWidget {
       title: title,
       theme: AppTheme.lightTheme,
       home: const Home(title: title),
-      routes: NavigationRouts.routes,
-      initialRoute: NavigationRouts.home,
-      // onGenerateRoute: ,
+      // routes: NavigationRouts.routes,
+      // initialRoute: NavigationRouts.home,
+      onGenerateRoute: RouteMethods.generateRoutes,
+      initialRoute: Home.route,
     );
-
   }
 }
 

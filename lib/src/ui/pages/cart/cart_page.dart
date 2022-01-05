@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+class Cart extends StatelessWidget {
+  const Cart({Key? key}) : super(key: key);
   static const String route = '/cart';
 
   @override
