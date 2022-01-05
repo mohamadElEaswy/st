@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:st/src/ui/colors/static_colors.dart';
+import 'package:st/src/ui/theme/theme.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -16,9 +18,13 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Column(
         children: const [Text('ss')],
       ),
-
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            color: GlobalStaticColors.logoColor,
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -28,20 +34,114 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Text('You'),
+              SizedBox(
+                height: 270.0,
+                child: Placeholder(),
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                'I\'m looking for..',
+                style: AppTheme.headerTextStyle,
+              ),
+              SizedBox(height: 10.0),
+              HorizontalCategoriesListView(),
+              SizedBox(height: 10.0),
+              //Featured Products
+              Text(
+                'Featured Products',
+                style: AppTheme.headerTextStyle,
+              ),
+              SizedBox(height: 10.0),
+              FeaturedProducts(),
+              SizedBox(height: 10.0),
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class HorizontalCategoriesListView extends StatelessWidget {
+  const HorizontalCategoriesListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150.0,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        children: const [
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+          SizedBox(
+            height: 150.0,
+            width: 100,
+            child: Placeholder(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FeaturedProducts extends StatelessWidget {
+  const FeaturedProducts({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 200,
+      child: Placeholder(),
     );
   }
 }
