@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:st/src/ui/colors/static_colors.dart';
 import 'package:st/src/ui/theme/theme.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
   final String title;
+  static const String route = '/home';
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _Home();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  void onPressed() {}
+class _Home extends State<Home> {
+  void onPressed() {
+    Navigator.pushNamed(context, '/second');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
