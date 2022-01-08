@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/colors/static_colors.dart';
+import 'package:st/src/ui/pages/cart/cart_page.dart';
 import 'package:st/src/ui/theme/theme.dart';
 
 class Home extends StatefulWidget {
@@ -13,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   void onPressed() {
-    Navigator.pushNamed(context, '/second');
+    RouteMethods.navigateTo(context: context, routeName: Cart.route);
   }
   @override
   Widget build(BuildContext context) {
