@@ -24,7 +24,9 @@ class RouteMethods {
           {required Widget page, bool fullscreenDialog = false}) =>
       MaterialPageRoute(
           builder: (context) => page, fullscreenDialog: fullscreenDialog);
-  static void navigateTo(
-          {required BuildContext context, required String routeName}) =>
-      Navigator.of(context).pushNamed(routeName);
+  static Future<Object?> navigateTo(
+          {required BuildContext context, required String routeName, dynamic args}) async{
+    Navigator.of(context).pushNamed(routeName, arguments: args);
+    return null;
+  }
 }

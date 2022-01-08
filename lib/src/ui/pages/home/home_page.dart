@@ -15,8 +15,9 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   void onPressed() {
-    RouteMethods.navigateTo(context: context, routeName: Cart.route);
+
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class _Home extends State<Home> {
           IconButton(
               onPressed: onPressed,
               icon: const Icon(Icons.shopping_basket_outlined)),
-          IconButton(onPressed: onPressed, icon: const Icon(Icons.person)),
+          IconButton(onPressed:  ()=> RouteMethods.navigateTo(context: context, routeName: Cart.route), icon: const Icon(Icons.person)),
         ],
       ),
       body: SingleChildScrollView(
