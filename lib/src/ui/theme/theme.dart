@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:st/src/ui/colors/static_colors.dart';
 
-class AppTheme{
+class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primarySwatch: GlobalStaticColors.primaryColor,
     appBarTheme: const AppBarTheme(
-      color: GlobalStaticColors.appBarColor,
+      color: GlobalStaticColors.appBarColor,elevation: 0.0,
       // actionsIconTheme: IconThemeData(
       //   color: Colors.black,
       // ),
       iconTheme: IconThemeData(
         color: Colors.black,
+        // color: GlobalStaticColors.logoColor,
       ),
     ),
-
   );
 
   static ThemeData darkTheme = ThemeData(

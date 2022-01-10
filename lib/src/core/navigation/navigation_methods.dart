@@ -12,7 +12,7 @@ class RouteMethods {
       case Home.route:
         return _materialPageRoute(page: const Home(title: 'home'));
       case Profile.route:
-        return _materialPageRoute(page: const Profile());
+        return _materialPageRoute(page: const Profile(), fullscreenDialog: true);
       case Cart.route:
         return _materialPageRoute(page: const Cart(), fullscreenDialog: true);
       default:
