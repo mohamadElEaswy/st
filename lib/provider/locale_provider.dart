@@ -1,26 +1,35 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:ui';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter/material.dart';
 import 'package:st/l10n/l10n.dart';
 
-class LocaleProvider extends ChangeNotifier{
+class LocaleProvider extends ChangeNotifier {
 
-  LocaleProvider(Locale locale) : _locale = locale;
+  Locale _locale = const Locale('en');
 
-  Locale? _locale;
+  Locale get locale => _locale;
 
-  Locale get locale =>_locale!;
+//change language method
+  void setLocale(Locale locale) {
+    if (!L10n.all.contains(locale)) return;
 
+    _locale = locale;
+    notifyListeners();
+  }
 
-    void setLocale(Locale locale){
-      //if the language dos not exist
-      if(!L10n.all.contains(locale)) return;
-      _locale =locale;
-      notifyListeners();
+  void clearLocale() {
+    _locale = const Locale('en');
+    notifyListeners();
+  }
+
+  Future<Locale> getLocaleData() async {
+    var prefs = await SharedPreferences.getInstance();
+    String? languageCode = prefs.getString('language_code');
+    if (languageCode  == null) {
+      return window.locale;
+    } else {
+      return Locale(languageCode);
     }
-    void clearLocale(){
-      _locale = null;
-      notifyListeners();
-    }
-
-
+  }
 }

@@ -13,15 +13,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp(
-    language: Locale('en', 'us'),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.language}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   static const String title = 'Stabraq';
-  final Locale language;
 
   // This widget is the root of your application.
   @override
@@ -34,7 +31,7 @@ class MyApp extends StatelessWidget {
         listener: (context, index) {},
         builder: (context, index) {
           return ChangeNotifierProvider<LocaleProvider>(
-              create: (context) => LocaleProvider(language),
+              create: (context) => LocaleProvider(),
               builder: (context, child) {
                 final provider = Provider.of<LocaleProvider>(context);
                 return MaterialApp(

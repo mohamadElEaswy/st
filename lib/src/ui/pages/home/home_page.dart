@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:st/l10n/l10n.dart';
-import 'package:st/provider/locale_provider.dart';
 import 'package:st/src/core/assets/assets.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
+import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
 import 'package:st/src/ui/pages/profile/profile_page.dart';
 import 'package:st/src/ui/theme/theme.dart';
@@ -62,7 +61,7 @@ class _Home extends State<Home> {
             Text(
               AppLocalizations.of(context)!.helloworld,
             ),
-            LanguagePickerWidget(),
+            const LanguagePickerWidget(),
             IconButton(
               tooltip: 'profile',
               onPressed: () {
@@ -168,76 +167,3 @@ class LanguageWidget extends StatelessWidget {
   }
 }
 
-// class LanguagePickerWidget extends StatelessWidget {
-//   const LanguagePickerWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final provider =
-//         Provider.of<LocaleProvider>(context);
-//     final locale = provider.locale;
-//     return DropdownButtonHideUnderline(
-//         child: DropdownButton(
-//       value: locale,
-//       icon: const SizedBox(width: 12),
-//       items: L10n.all.map(
-//         (locale) {
-//           final flag = L10n.getFlag(locale.languageCode);
-//           return DropdownMenuItem(
-//             child: Center(
-//               child: Text(
-//                 flag,
-//                 style: const TextStyle(fontSize: 12),
-//               ),
-//             ),
-//             value: locale,
-//             onTap: () {
-//               final provider =
-//                   Provider.of<LocaleProvider>(context, listen: false);
-//               return provider.setLocale(locale);
-//             },
-//           );
-//         },
-//       ).toList(),
-//       onChanged: (_) {},
-//     ));
-//   }
-// }
-class LanguagePickerWidget extends StatelessWidget {
-  const LanguagePickerWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<LocaleProvider>(context);
-    final locale = provider.locale ?? Locale('en');
-
-    return DropdownButtonHideUnderline(
-      child: DropdownButton(
-        value: locale,
-        icon: Container(width: 12),
-        items: L10n.all.map(
-              (locale) {
-            final flag = L10n.getFlag(locale.languageCode);
-
-            return DropdownMenuItem(
-              child: Center(
-                child: Text(
-                  flag,
-                  style: TextStyle(fontSize: 32),
-                ),
-              ),
-              value: locale,
-              onTap: () {
-                final provider =
-                Provider.of<LocaleProvider>(context, listen: false);
-
-                provider.setLocale(locale);
-              },
-            );
-          },
-        ).toList(),
-        onChanged: (_) {},
-      ),
-    );
-  }
-}
