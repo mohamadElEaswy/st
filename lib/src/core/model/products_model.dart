@@ -1,13 +1,13 @@
-class Products {
+class Product {
   int? id;
   String? title;
-  double? price;
+  dynamic price;
   String? description;
   String? category;
   String? image;
   Rating? rating;
 
-  Products(
+  Product(
       {this.id,
         this.title,
         this.price,
@@ -16,7 +16,7 @@ class Products {
         this.image,
         this.rating});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     price = json['price'];
@@ -40,14 +40,14 @@ class Products {
     }
     return data;
   }
-  static List<Products> parseList(List<dynamic> list) {
-    return list.map((i) => Products.fromJson(i)).toList();
+  static List<Product> parseList(List<dynamic> list) {
+    return list.map((i) => Product.fromJson(i)).toList();
   }
 }
 
 class Rating {
-  double? rate;
-  double? count;
+  dynamic rate;
+  int? count;
 
   Rating({this.rate, this.count});
 

@@ -4,10 +4,10 @@ import 'package:st/l10n/l10n.dart';
 import 'package:st/src/core/assets/assets.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
+import 'package:st/src/core/model/products_model.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
-import 'package:st/src/ui/pages/profile/profile_page.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,10 +27,12 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    print(screenWidth.toString());
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},
       builder: (context, state) {
-        final AppCubit bloc = AppCubit.get(context);
+        var bloc = AppCubit.get(context);
         return Scaffold(
           drawer: Container(
             color: Colors.white,
@@ -44,13 +46,15 @@ class _Home extends State<Home> {
               ),
             ),
           ),
-          body: buildBody(bloc: bloc),
+          body: !bloc.loading
+              ? buildBody(bloc: bloc, screenWidth: screenWidth)
+              : const Center(child: CircularProgressIndicator()),
         );
       },
     );
   }
 
-  Widget buildBody({required AppCubit bloc}) {
+  Widget buildBody({required AppCubit bloc, double? screenWidth}) {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: <Widget>[
@@ -105,17 +109,19 @@ class _Home extends State<Home> {
         SliverToBoxAdapter(
           child: SizedBox(
             height: 100.0,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return const SizedBox(
-                  width: 100.0,
-                  child: Card(
-                    child: Text('data'),
-                  ),
-                );
-              },
+            child: Center(
+              child: ListView.builder(physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return const SizedBox(
+                    width: 100.0,
+                    child: Card(
+                      child: Text('data'),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -130,24 +136,49 @@ class _Home extends State<Home> {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => Padding(
-              padding: const EdgeInsets.all(contentPadding),
-              child: Center(
-                child: SizedBox(
-                  height: 20.0,
-                  child: Text('$index'),
-                ),
-              ),
-            ),
-            childCount: 10,
+        // SliverList(
+        //   delegate: SliverChildBuilderDelegate(
+        //     (context, index) => Padding(
+        //         padding: const EdgeInsets.all(contentPadding),
+        //         child: _productListItem(product: bloc.productsList![index], screenWidth: screenWidth)
+        //             ),
+        //     childCount: bloc.productsList!.length,
+        //   ),
+        // ),
+        SliverGrid(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 600.0,
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
+            childAspectRatio: 4.0,
           ),
-        ),
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Padding(
+                  padding: const EdgeInsets.all(contentPadding),
+                  child: _productListItem(
+                      product: bloc.productsList![index],
+                      screenWidth: screenWidth));
+            },
+            childCount: bloc.productsList!.length,
+          ),
+        )
       ],
     );
   }
-} /*no way home no no */
+
+  Widget _productListItem({required Product product, double? screenWidth}) {
+    return ListTile(
+        leading: SizedBox(
+            height: 120, width: 60, child: Image.network(product.image!)),
+        title: Text(product.title!,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyMedium),
+        subtitle: Text('LE ' + product.price!.toString(),
+            style: Theme.of(context).textTheme.bodyMedium));
+  }
+}
 
 class LanguageWidget extends StatelessWidget {
   const LanguageWidget({Key? key}) : super(key: key);
@@ -167,4 +198,3 @@ class LanguageWidget extends StatelessWidget {
     );
   }
 }
-
