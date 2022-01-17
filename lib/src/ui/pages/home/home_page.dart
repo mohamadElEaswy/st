@@ -64,10 +64,11 @@ class _Home extends State<Home> {
             const LanguagePickerWidget(),
             IconButton(
               tooltip: 'profile',
-              onPressed: () {
-                bloc.hello('h');
-                RouteMethods.navigateTo(
-                    context: context, routeName: Profile.route);
+              onPressed: () async {
+                await bloc.getAllProducts();
+                // print(bloc.products!);
+                // RouteMethods.navigateTo(
+                //     context: context, routeName: Profile.route);
               },
               icon: const Icon(Icons.person_outline_rounded),
             ),

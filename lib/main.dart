@@ -7,20 +7,25 @@ import 'package:st/provider/locale_provider.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
+import 'package:st/src/database/local/local_sevices.dart';
+import 'package:st/src/services/remote/dio_helper.dart';
 import 'package:st/src/ui/pages/home/home_page.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  await LocalDBServices.init();
+  DioHelper.init();
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   static const String title = 'Stabraq';
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
