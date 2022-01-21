@@ -8,6 +8,7 @@ import 'package:st/src/core/model/products_model.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
+import 'package:st/src/ui/pages/single_product/single_product.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,11 +29,10 @@ class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    print(screenWidth.toString());
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var bloc = AppCubit.get(context);
+        AppCubit bloc = AppCubit.get(context);
         return Scaffold(
           drawer: Container(
             color: Colors.white,
@@ -46,7 +46,7 @@ class _Home extends State<Home> {
               ),
             ),
           ),
-          body: !bloc.loading
+          body: !bloc.productsLoading
               ? buildBody(bloc: bloc, screenWidth: screenWidth)
               : const Center(child: CircularProgressIndicator()),
         );
@@ -69,7 +69,8 @@ class _Home extends State<Home> {
             IconButton(
               tooltip: 'profile',
               onPressed: () async {
-                await bloc.getAllProducts();
+                bloc.getSingleProduct(productNumber: 1);
+                // await bloc.getHomeProducts();
                 // print(bloc.products!);
                 // RouteMethods.navigateTo(
                 //     context: context, routeName: Profile.route);
@@ -110,14 +111,15 @@ class _Home extends State<Home> {
           child: SizedBox(
             height: 100.0,
             child: Center(
-              child: ListView.builder(physics: const BouncingScrollPhysics(),
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
+                itemCount: bloc.categoriesList.length,
                 itemBuilder: (context, index) {
-                  return const SizedBox(
+                  return SizedBox(
                     width: 100.0,
                     child: Card(
-                      child: Text('data'),
+                      child: Text(bloc.categoriesList[index]),
                     ),
                   );
                 },
@@ -156,19 +158,27 @@ class _Home extends State<Home> {
             (BuildContext context, int index) {
               return Padding(
                   padding: const EdgeInsets.all(contentPadding),
-                  child: _productListItem(
-                      product: bloc.productsList![index],
+                  child: _productListItem(bloc: bloc,
+                      product: bloc.productsList[index],
                       screenWidth: screenWidth));
             },
-            childCount: bloc.productsList!.length,
+            childCount: bloc.productsList.length,
           ),
         )
       ],
     );
   }
 
-  Widget _productListItem({required Product product, double? screenWidth}) {
+  Widget _productListItem({required Product product, required AppCubit bloc, double? screenWidth}) {
     return ListTile(
+        onTap: () async{
+          bloc.getSingleProduct(productNumber: product.id!);
+          RouteMethods.navigateTo(
+            context: context,
+            routeName: SingleProductPage.route,
+            args: product.id,
+          );
+        },
         leading: SizedBox(
             height: 120, width: 60, child: Image.network(product.image!)),
         title: Text(product.title!,
