@@ -107,3 +107,4 @@ class AppCubit extends Cubit<AppState> {
     return null;
   }
 }
+
