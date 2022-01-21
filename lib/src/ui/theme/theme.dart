@@ -5,7 +5,9 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primarySwatch: GlobalStaticColors.primaryColor,
     appBarTheme: const AppBarTheme(
-      color: GlobalStaticColors.appBarColor,elevation: 0.0,
+      color: GlobalStaticColors.appBarColor,
+      // color: Colors.indigo,
+      elevation: 0.0,
       // actionsIconTheme: IconThemeData(
       //   color: Colors.black,
       // ),
@@ -14,6 +16,7 @@ class AppTheme {
         // color: GlobalStaticColors.logoColor,
       ),
     ),
+    scaffoldBackgroundColor: Colors.grey[50],
   );
 
   static ThemeData darkTheme = ThemeData(

@@ -39,9 +39,8 @@ class _Home extends State<Home> {
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    AppLocalizations.of(context)!.language,
-                  ),
+                  Text(AppLocalizations.of(context)!.language),
+                  const LanguagePickerWidget(),
                 ],
               ),
             ),
@@ -62,19 +61,9 @@ class _Home extends State<Home> {
           centerTitle: true,
           floating: true,
           actions: [
-            Text(
-              AppLocalizations.of(context)!.helloworld,
-            ),
-            const LanguagePickerWidget(),
             IconButton(
               tooltip: 'profile',
-              onPressed: () async {
-                bloc.getSingleProduct(productNumber: 1);
-                // await bloc.getHomeProducts();
-                // print(bloc.products!);
-                // RouteMethods.navigateTo(
-                //     context: context, routeName: Profile.route);
-              },
+              onPressed: () {},
               icon: const Icon(Icons.person_outline_rounded),
             ),
             IconButton(
@@ -158,7 +147,8 @@ class _Home extends State<Home> {
             (BuildContext context, int index) {
               return Padding(
                   padding: const EdgeInsets.all(contentPadding),
-                  child: _productListItem(bloc: bloc,
+                  child: _productListItem(
+                      bloc: bloc,
                       product: bloc.productsList[index],
                       screenWidth: screenWidth));
             },
@@ -169,9 +159,10 @@ class _Home extends State<Home> {
     );
   }
 
-  Widget _productListItem({required Product product, required AppCubit bloc, double? screenWidth}) {
+  Widget _productListItem(
+      {required Product product, required AppCubit bloc, double? screenWidth}) {
     return ListTile(
-        onTap: () async{
+        onTap: () async {
           bloc.getSingleProduct(productNumber: product.id!);
           RouteMethods.navigateTo(
             context: context,

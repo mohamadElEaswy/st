@@ -19,31 +19,56 @@ class SingleProductPage extends StatelessWidget {
       builder: (context, state) {
         final AppCubit bloc = AppCubit.get(context);
         return Scaffold(
-            appBar: AppBar(
-              title: const Text('Single Product'),
-            ),
-            body: ConditionalBuilder(
-                condition:
-                    !bloc.singleProductLoading && bloc.singleProduct != null,
-                builder: (context) =>
-                    _singleProduct(product: bloc.singleProduct!),
-                fallback: (context) => const LoadingIndicator()));
+          appBar: AppBar(
+            title: const Text('Single Product'),
+          ),
+          body: ConditionalBuilder(
+              condition:
+                  !bloc.singleProductLoading && bloc.singleProduct != null,
+              builder: (context) => _singleProduct(
+                  product: bloc.singleProduct!, context: context),
+              fallback: (context) => const LoadingIndicator()),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {},
+            label: const Text('Add to cart'),
+          ),
+        );
       },
     );
   }
 
-  Widget _singleProduct({required Product product}) => Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(product.title!),
-                SizedBox(height: 100, child: Image.network(product.image!)),
-                Text(product.price.toString()),
-              ],
+  Widget _singleProduct(
+          {required Product product, required BuildContext context}) =>
+      SingleChildScrollView(padding: const EdgeInsets.all(8.0),
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Center(
+              child: SizedBox(
+                // height: 400,
+                child: Image.network(product.image!),
+              ),
             ),
-          ),
+            const SizedBox(height: 10),
+            Text(
+              product.title!,
+              style: Theme.of(context).textTheme.titleLarge,
+              // textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'LE' + product.price.toString(),
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              product.description!,
+              style: Theme.of(context).textTheme.caption,
+            ),
+            const SizedBox(height: 10),
+          ],
         ),
       );
 }
