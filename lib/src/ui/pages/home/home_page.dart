@@ -99,20 +99,16 @@ class _Home extends State<Home> {
         SliverToBoxAdapter(
           child: SizedBox(
             height: 100.0,
-            child: Center(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: bloc.categoriesList.length,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 100.0,
-                    child: Card(
-                      child: Text(bloc.categoriesList[index]),
-                    ),
-                  );
-                },
-              ),
+            child: ListView.builder(
+              padding: const EdgeInsets.all(10.0),
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: bloc.categoriesList.length,
+              itemBuilder: (context, index) {
+                return _categoriesListItem(
+                  item: bloc.categoriesList[index],
+                );
+              },
             ),
           ),
         ),
@@ -127,15 +123,6 @@ class _Home extends State<Home> {
             ),
           ),
         ),
-        // SliverList(
-        //   delegate: SliverChildBuilderDelegate(
-        //     (context, index) => Padding(
-        //         padding: const EdgeInsets.all(contentPadding),
-        //         child: _productListItem(product: bloc.productsList![index], screenWidth: screenWidth)
-        //             ),
-        //     childCount: bloc.productsList!.length,
-        //   ),
-        // ),
         SliverGrid(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 600.0,
@@ -179,6 +166,11 @@ class _Home extends State<Home> {
         subtitle: Text('LE ' + product.price!.toString(),
             style: Theme.of(context).textTheme.bodyMedium));
   }
+
+  Widget _categoriesListItem({required item}) => Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+          child: Text(item, style: Theme.of(context).textTheme.headline6)));
 }
 
 class LanguageWidget extends StatelessWidget {
