@@ -4,6 +4,7 @@ import 'package:st/src/ui/pages/error_page/error_page.dart';
 import 'package:st/src/ui/pages/home/home_page.dart';
 import 'package:st/src/ui/pages/login/login_page.dart';
 import 'package:st/src/ui/pages/profile/profile_page.dart';
+import 'package:st/src/ui/pages/register/register.dart';
 import 'package:st/src/ui/pages/single_product/single_product.dart';
 
 class RouteMethods {
@@ -11,19 +12,28 @@ class RouteMethods {
     // ignore: unused_local_variable
     final args = settings.arguments;
     switch (settings.name) {
+      //home page & the initial route
       case Home.route:
         return _materialPageRoute(page: const Home(title: 'home'));
+      //profile page
       case Profile.route:
         return _materialPageRoute(
             page: const Profile(), fullscreenDialog: true);
+      //cart page
       case Cart.route:
         return _materialPageRoute(page: const Cart(), fullscreenDialog: true);
-        case LoginPage.route:
+      //login page
+      case LoginPage.route:
         return _materialPageRoute(page: const LoginPage());
+      //single product page
       case SingleProductPage.route:
         return _materialPageRoute(
-            page: SingleProductPage(productNumber: args),
-            fullscreenDialog: true);
+            page: SingleProductPage(productNumber: args), fullscreenDialog: true);
+      //single registerPage page
+      case RegisterPage.route:
+        return _materialPageRoute(
+          page: const RegisterPage(),
+        );
       default:
         return _materialPageRoute(page: const ErrorPage());
     }

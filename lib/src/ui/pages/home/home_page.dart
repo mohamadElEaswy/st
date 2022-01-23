@@ -9,6 +9,7 @@ import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
 import 'package:st/src/ui/pages/login/login_page.dart';
+import 'package:st/src/ui/pages/register/register.dart';
 import 'package:st/src/ui/pages/single_product/single_product.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,7 +75,7 @@ class _Home extends State<Home> {
             IconButton(
               tooltip: 'cart',
               onPressed: () => RouteMethods.navigateTo(
-                  context: context, routeName: Cart.route),
+                  context: context, routeName: RegisterPage.route),
               icon: const Icon(Icons.shopping_basket_outlined),
             ),
           ],

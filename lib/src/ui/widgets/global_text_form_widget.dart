@@ -5,12 +5,12 @@ class GlobalTextFormField extends StatelessWidget {
       {Key? key,
         required this.controller,
         required this.lable,
-        required this.errorText,
+        this.errorText,
         required this.enabled,
         required this.focusNode,
         required this.onEditingComplete,
         required this.onChanged,
-        required this.obscureText,
+        this.obscureText,
         required this.textInputAction,
         required this.textInputType,
         required this.iconData,
@@ -27,7 +27,7 @@ class GlobalTextFormField extends StatelessWidget {
   final String? hintText;
   final bool enabled;
   final IconData iconData;
-  final bool obscureText;
+  final bool? obscureText;
   final Widget? suffix;
   final VoidCallback? onEditingComplete;
   final void Function(String) onChanged;
@@ -46,7 +46,7 @@ class GlobalTextFormField extends StatelessWidget {
         //     borderSide: BorderSide(color: Colors.teal),
         // ),
       ),
-      obscureText: obscureText,
+      obscureText: obscureText ?? false,
       autocorrect: false,
       focusNode: focusNode,
       onEditingComplete: onEditingComplete,

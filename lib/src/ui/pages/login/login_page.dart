@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:st/src/ui/theme/theme.dart';
+import 'package:st/src/ui/widgets/global_spacer.dart';
 import 'package:st/src/ui/widgets/global_text_form_widget.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,16 +47,16 @@ class LoginPage extends StatelessWidget {
               iconData: Icons.password,
               lable: 'password',
               hintText: '*********',
-              errorText: 'password is required',
+              // errorText: 'password is required',
               controller: password,
-              onChanged: (String password) {},
-              enabled: false,
+              onChanged: (String password) {print(password);},
+              enabled: true,
               focusNode: emailFocusNode,
-              obscureText: false,
+              obscureText: true,
               onEditingComplete: () {},
               textInputAction: TextInputAction.done,
               textInputType: TextInputType.number,
-              suffix: const Icon(Icons.password),
+              suffix: InkWell(child: const Icon(Icons.password, color: Colors.indigo,), onTap: (){}),
             ),
             // spaceBetweenFields(),
             Align(
@@ -85,7 +86,8 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {},
                     child: const Text('Login with GOOGLE',
                         style: TextStyle(color: Colors.black)))),
-            spaceBetweenFields(),SizedBox(
+            spaceBetweenFields(),
+            SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
@@ -101,14 +103,11 @@ class LoginPage extends StatelessWidget {
                 const Text('Don\'t have an account? '),
                 TextButton(onPressed: () {}, child: const Text('Register')),
               ],
-            ),spaceBetweenFields(),
+            ),
+            spaceBetweenFields(),
           ],
         ),
       ),
     );
   }
-
-  Widget spaceBetweenFields({double? height}) {
-  return SizedBox(height: height ?? 20);
-}
 }
