@@ -3,14 +3,22 @@ import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:st/src/ui/widgets/global_spacer.dart';
 import 'package:st/src/ui/widgets/global_text_form_widget.dart';
+
 const String _pageTitle = 'Register';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
   static const String route = '/register';
 
   @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  bool checkedBox = false;
+  @override
   Widget build(BuildContext context) {
+
     final TextEditingController email = TextEditingController();
     final TextEditingController name = TextEditingController();
     final TextEditingController password = TextEditingController();
@@ -40,7 +48,7 @@ class RegisterPage extends StatelessWidget {
               controller: name,
               onChanged: (String name) {},
               enabled: false,
-              focusNode: emailFocusNode,
+              focusNode: nameFocusNode,
               obscureText: false,
               onEditingComplete: () {},
               textInputAction: TextInputAction.next,
@@ -71,7 +79,7 @@ class RegisterPage extends StatelessWidget {
               controller: password,
               onChanged: (String password) {},
               enabled: false,
-              focusNode: emailFocusNode,
+              focusNode: passwordFocusNode,
               obscureText: false,
               onEditingComplete: () {},
               textInputAction: TextInputAction.done,
@@ -80,8 +88,17 @@ class RegisterPage extends StatelessWidget {
             ),
             // spaceBetweenFields(),
             Row(
+
               children: [
-                Checkbox(value: true, onChanged: (value){print(value.toString());}),
+                Checkbox(
+                    checkColor: Colors.white,
+                    fillColor: MaterialStateProperty.all(Colors.indigo),
+                    value: checkedBox,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        checkedBox = value!;
+                      });
+                    }),
                 const Text('Agree on'),
                 TextButton(
                     onPressed: () {},
@@ -110,7 +127,8 @@ class RegisterPage extends StatelessWidget {
                     onPressed: () {},
                     child: const Text('Login with GOOGLE',
                         style: TextStyle(color: Colors.black)))),
-            spaceBetweenFields(),SizedBox(
+            spaceBetweenFields(),
+            SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
@@ -124,9 +142,13 @@ class RegisterPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('Do you have an account?'),
-                TextButton(onPressed: () =>RouteMethods.navigateTo(context: context, routeName: RegisterPage.route), child: const Text('Login')),
+                TextButton(
+                    onPressed: () => RouteMethods.navigateTo(
+                        context: context, routeName: RegisterPage.route),
+                    child: const Text('Login')),
               ],
-            ),spaceBetweenFields(),
+            ),
+            spaceBetweenFields(),
           ],
         ),
       ),
