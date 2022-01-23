@@ -20,7 +20,6 @@ class AppCubit extends Cubit<AppState> {
     getHomeCategories();
   }
 
-
   bool productsLoading = true;
   List productsList = [];
 
@@ -57,8 +56,7 @@ class AppCubit extends Cubit<AppState> {
       Response categoriesResponse =
           await httpInstance.getResponse(url: EndPoints.allCategories);
       if (categoriesResponse.statusCode == 200) {
-        categoriesList = await json
-            .decode(categoriesResponse.body).toList();
+        categoriesList = await json.decode(categoriesResponse.body).toList();
         // productsLoading = false;
         emit(SuccessCategoriesState());
       } else {
@@ -102,9 +100,10 @@ class AppCubit extends Cubit<AppState> {
     } catch (e) {
       print(e.toString());
       singleProductLoading = false;
-      emit(ErrorProductState(error: e.toString()),);
+      emit(
+        ErrorProductState(error: e.toString()),
+      );
     }
     return null;
   }
 }
-

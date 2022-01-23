@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
 import 'package:st/src/ui/pages/error_page/error_page.dart';
 import 'package:st/src/ui/pages/home/home_page.dart';
+import 'package:st/src/ui/pages/login/login_page.dart';
 import 'package:st/src/ui/pages/profile/profile_page.dart';
 import 'package:st/src/ui/pages/single_product/single_product.dart';
 
@@ -17,11 +18,11 @@ class RouteMethods {
             page: const Profile(), fullscreenDialog: true);
       case Cart.route:
         return _materialPageRoute(page: const Cart(), fullscreenDialog: true);
+        case LoginPage.route:
+        return _materialPageRoute(page: const LoginPage());
       case SingleProductPage.route:
         return _materialPageRoute(
-            page: SingleProductPage(
-              productNumber: args,
-            ),
+            page: SingleProductPage(productNumber: args),
             fullscreenDialog: true);
       default:
         return _materialPageRoute(page: const ErrorPage());

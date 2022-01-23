@@ -8,6 +8,7 @@ import 'package:st/src/core/model/products_model.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
+import 'package:st/src/ui/pages/login/login_page.dart';
 import 'package:st/src/ui/pages/single_product/single_product.dart';
 import 'package:st/src/ui/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,21 +34,23 @@ class _Home extends State<Home> {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit bloc = AppCubit.get(context);
-        return Scaffold(
-          drawer: Container(
-            color: Colors.white,
-            child: Center(
-              child: Column(
-                children: [
-                  Text(AppLocalizations.of(context)!.language),
-                  const LanguagePickerWidget(),
-                ],
+        return SafeArea(bottom: true,top: true,
+          child: Scaffold(
+            drawer: Container(
+              color: Colors.white,
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(AppLocalizations.of(context)!.language),
+                    const LanguagePickerWidget(),
+                  ],
+                ),
               ),
             ),
+            body: !bloc.productsLoading
+                ? buildBody(bloc: bloc, screenWidth: screenWidth)
+                : const Center(child: CircularProgressIndicator()),
           ),
-          body: !bloc.productsLoading
-              ? buildBody(bloc: bloc, screenWidth: screenWidth)
-              : const Center(child: CircularProgressIndicator()),
         );
       },
     );
@@ -63,7 +66,9 @@ class _Home extends State<Home> {
           actions: [
             IconButton(
               tooltip: 'profile',
-              onPressed: () {},
+              onPressed: () {
+                RouteMethods.navigateTo(context: context, routeName: LoginPage.route);
+              },
               icon: const Icon(Icons.person_outline_rounded),
             ),
             IconButton(

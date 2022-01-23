@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 return MaterialApp(
                   title: title,
                   theme: AppTheme.lightTheme,
-                  home: const Home(title: title),
+                  // home: const Home(title: title),
                   onGenerateRoute: RouteMethods.generateRoutes,
                   initialRoute: Home.route,
                   locale: provider.locale,
