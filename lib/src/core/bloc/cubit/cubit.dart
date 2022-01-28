@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-// import 'package:http/http.dart' as http;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/end_points/end_points.dart';
-import 'package:st/src/core/model/products_model.dart';
 import 'package:st/src/core/model/serialize_model.dart';
 import 'package:st/src/services/remote/http_helper.dart';
 

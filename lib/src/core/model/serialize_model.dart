@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 part 'serialize_model.g.dart';
 
@@ -41,20 +39,3 @@ class Rating {
 }
 
 
-Future<Product?> getData() async {
-  const googleLocationsURL = 'https://fakestoreapi.com/products';
-
-  // Retrieve the locations of Google offices
-  try {
-    final response = await http.get(Uri.parse(googleLocationsURL));
-    if (response.statusCode == 200) {
-      return Product.fromJson(json.decode(response.body));
-    }
-  } catch (e) {
-    print(e);
-  }
-  return null;
-
-  // Fallback for when the above HTTP request fails.
-
-}
