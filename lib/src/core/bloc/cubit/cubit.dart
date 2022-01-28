@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/end_points/end_points.dart';
 import 'package:st/src/core/model/products_model.dart';
+import 'package:st/src/core/model/serialize_model.dart';
 import 'package:st/src/services/remote/http_helper.dart';
 
 class AppCubit extends Cubit<AppState> {

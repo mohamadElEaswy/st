@@ -43,6 +43,9 @@ dependencies:
   shared_preferences: ^2.0.12
   http: ^0.13.4
   conditional_builder_null_safety: ^0.0.6
+  json_serializable: ^6.1.4
+  build_runner: ^2.1.7
+  json_annotation: ^4.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

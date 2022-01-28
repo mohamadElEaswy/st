@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/model/products_model.dart';
+import 'package:st/src/core/model/serialize_model.dart';
 import 'package:st/src/ui/widgets/loading_indicator.dart';
 
 class SingleProductPage extends StatelessWidget {
@@ -48,12 +49,12 @@ class SingleProductPage extends StatelessWidget {
             Center(
               child: SizedBox(
                 // height: 400,
-                child: Image.network(product.image!),
+                child: Image.network(product.image),
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              product.title!,
+              product.title,
               style: Theme.of(context).textTheme.titleLarge,
               // textAlign: TextAlign.center,
             ),
@@ -64,10 +65,12 @@ class SingleProductPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              product.description!,
+              product.description,
               style: Theme.of(context).textTheme.caption,
             ),
             const SizedBox(height: 10),
+            Text(product.rating.rate.toString()),
+
           ],
         ),
       );

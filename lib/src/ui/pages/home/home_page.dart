@@ -5,6 +5,7 @@ import 'package:st/src/core/assets/assets.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
 import 'package:st/src/core/model/products_model.dart';
+import 'package:st/src/core/model/serialize_model.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/cart/cart_page.dart';
@@ -156,7 +157,7 @@ class _Home extends State<Home> {
       {required Product product, required AppCubit bloc, double? screenWidth}) {
     return ListTile(
         onTap: () async {
-          bloc.getSingleProduct(productNumber: product.id!);
+          bloc.getSingleProduct(productNumber: product.id);
           RouteMethods.navigateTo(
             context: context,
             routeName: SingleProductPage.route,
@@ -164,12 +165,12 @@ class _Home extends State<Home> {
           );
         },
         leading: SizedBox(
-            height: 120, width: 60, child: Image.network(product.image!)),
-        title: Text(product.title!,
+            height: 120, width: 60, child: Image.network(product.image)),
+        title: Text(product.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyMedium),
-        subtitle: Text('LE ' + product.price!.toString(),
+        subtitle: Text('LE ' + product.price.toString(),
             style: Theme.of(context).textTheme.bodyMedium));
   }
 
