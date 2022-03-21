@@ -36,12 +36,16 @@ class GlobalTextFormField extends StatelessWidget {
     return TextField(
       controller: controller,
       textInputAction: textInputAction,keyboardType: textInputType,
-      decoration: InputDecoration(suffix: suffix,
-        fillColor: Colors.grey[100],filled: true,
+      decoration: InputDecoration(
+        suffix: suffix,
+        fillColor: Colors.grey[100],
+        filled: true,
         // label: Text(lable),
-        labelText: lable,icon: Icon(iconData),
+        labelText: lable,
+        icon: Icon(iconData),
         errorText: errorText,
-        enabled: enabled,hintText: hintText,
+        enabled: enabled,
+        hintText: hintText,
         // border: const OutlineInputBorder(
         //     borderSide: BorderSide(color: Colors.teal),
         // ),

@@ -28,31 +28,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AppCubit>(create: (BuildContext context) => AppCubit()..fetch()),
+        BlocProvider<AppCubit>(create: (BuildContext context) => AppCubit()),
       ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, index) {},
         builder: (context, index) {
           return ChangeNotifierProvider<LocaleProvider>(
-              create: (context) => LocaleProvider(),
-              builder: (context, child) {
-                final provider = Provider.of<LocaleProvider>(context);
-                return MaterialApp(
-                  title: title,
-                  theme: AppTheme.lightTheme,
-                  // home: const Home(title: title),
-                  onGenerateRoute: RouteMethods.generateRoutes,
-                  initialRoute: Home.route,
-                  locale: provider.locale,
-                  supportedLocales: L10n.all,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                  ],
-                );
-              });
+            create: (context) => LocaleProvider(),
+            builder: (context, child) {
+              final provider = Provider.of<LocaleProvider>(context);
+              return MaterialApp(
+                title: title,
+                theme: AppTheme.lightTheme,
+                // home: const Home(title: title),
+                onGenerateRoute: RouteMethods.generateRoutes,
+                initialRoute: Home.route,
+                locale: provider.locale,
+                supportedLocales: L10n.all,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+              );
+            },
+          );
         },
       ),
     );

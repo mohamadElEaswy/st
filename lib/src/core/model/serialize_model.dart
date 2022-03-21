@@ -1,41 +1,39 @@
-import 'package:json_annotation/json_annotation.dart';
+// import 'package:json_annotation/json_annotation.dart';
 
-part 'serialize_model.g.dart';
 
-@JsonSerializable()
-class Product{
-  Product(
-      this.id,
-      this.title,
-      this.price,
-      this.description,
-      this.category,
-      this.image,
-      this.rating,
-      );
-  int id;
-  String title;
-  dynamic price;
-  String description;
-  String category;
-  String image;
-  Rating rating;
+// @JsonSerializable()
+class Product {
+  Product({
+    required this.id,
+    required this.title,
+    this.price,
+    required this.description,
+    required this.category,
+    required this.image,
+    required this.rating,
+  });
+  late int id;
+  late  String title;
+  late dynamic price;
+  late String description;
+  late String category;
+  late String image;
+  late Rating rating;
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
-
-  Map<String, dynamic> toJson()=> _$ProductToJson(this);
+  // factory Product.fromJson(Map<String, dynamic> json) =>
+  //     _$ProductFromJson(json);
+  //
+  // Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
 
-@JsonSerializable()
+// @JsonSerializable()
 class Rating {
   dynamic rate;
   int? count;
 
   Rating({this.rate, this.count});
 
-  factory Rating.fromJson(Map<String, dynamic> json) =>_$RatingFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RatingToJson(this);
+  // factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
+  //
+  // Map<String, dynamic> toJson() => _$RatingToJson(this);
 }
-
-

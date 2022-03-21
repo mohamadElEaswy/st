@@ -4,7 +4,6 @@ import 'package:st/l10n/l10n.dart';
 import 'package:st/src/core/assets/assets.dart';
 import 'package:st/src/core/bloc/cubit/cubit.dart';
 import 'package:st/src/core/bloc/states/states.dart';
-import 'package:st/src/core/model/serialize_model.dart';
 import 'package:st/src/core/navigation/navigation_methods.dart';
 import 'package:st/src/ui/locale/locale_ui_button.dart';
 import 'package:st/src/ui/pages/login/login_page.dart';
@@ -34,7 +33,9 @@ class _Home extends State<Home> {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit bloc = AppCubit.get(context);
-        return SafeArea(bottom: true,top: true,
+        return SafeArea(
+          bottom: true,
+          top: true,
           child: Scaffold(
             drawer: Container(
               color: Colors.white,
@@ -47,9 +48,10 @@ class _Home extends State<Home> {
                 ),
               ),
             ),
-            body: !bloc.productsLoading
-                ? buildBody(bloc: bloc, screenWidth: screenWidth)
-                : const Center(child: CircularProgressIndicator()),
+            body: buildBody(bloc: bloc, screenWidth: screenWidth),
+            // !bloc.productsLoading
+            //     ? buildBody(bloc: bloc, screenWidth: screenWidth)
+            //     : const Center(child: CircularProgressIndicator()),
           ),
         );
       },
@@ -67,7 +69,8 @@ class _Home extends State<Home> {
             IconButton(
               tooltip: 'profile',
               onPressed: () {
-                RouteMethods.navigateTo(context: context, routeName: LoginPage.route);
+                RouteMethods.navigateTo(
+                    context: context, routeName: LoginPage.route);
               },
               icon: const Icon(Icons.person_outline_rounded),
             ),
@@ -78,11 +81,14 @@ class _Home extends State<Home> {
               icon: const Icon(Icons.shopping_basket_outlined),
             ),
           ],
-          title: Image.asset(
-            AppAssets.appLogo,
-            fit: BoxFit.fitHeight,
-            height: 25.0,
-          ),
+          title:
+          // Image.asset(AppAssets.appLogo, height: 25.0, fit: BoxFit.contain,),
+              Image.asset(
+                AppAssets.appLogo,
+                fit: BoxFit.fitHeight,
+                height: 25.0,
+              ),
+
         ),
         const SliverToBoxAdapter(
           child: SizedBox(
@@ -140,36 +146,40 @@ class _Home extends State<Home> {
               return Padding(
                   padding: const EdgeInsets.all(contentPadding),
                   child: _productListItem(
-                      bloc: bloc,
-                      product: bloc.productsList[index],
+                      // bloc: bloc,
+                      // product: bloc.productsList[index],
                       screenWidth: screenWidth));
             },
-            childCount: bloc.productsList.length,
+            childCount: 10,
           ),
         )
       ],
     );
   }
 
-  Widget _productListItem(
-      {required Product product, required AppCubit bloc, double? screenWidth}) {
+  Widget _productListItem({
+    // required Product product, required AppCubit bloc,
+    double? screenWidth,
+  }) {
     return ListTile(
         onTap: () async {
-          bloc.getSingleProduct(productNumber: product.id);
+          // bloc.getSingleProduct(productNumber: product.id);
           RouteMethods.navigateTo(
             context: context,
             routeName: SingleProductPage.route,
-            args: product.id,
+            args: 1,
           );
         },
         leading: SizedBox(
-            height: 120, width: 60, child: Image.network(product.image)),
-        title: Text(product.title,
+          height: 120,
+          width: 60,
+          child: Image.asset(AppAssets.productImage),
+        ),
+        title: Text('product.title',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyMedium),
-        subtitle: Text('LE ' + product.price.toString(),
-            style: Theme.of(context).textTheme.bodyMedium));
+        subtitle: Text('LE 10', style: Theme.of(context).textTheme.bodyMedium));
   }
 
   Widget _categoriesListItem({required item}) => Padding(
